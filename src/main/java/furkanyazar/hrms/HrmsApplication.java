@@ -20,7 +20,7 @@ public class HrmsApplication {
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2).select()
-				.apis(RequestHandlerSelectors.basePackage("kodlamaio.northwind")).build();
+				.apis(RequestHandlerSelectors.basePackage("furkanyazar.hrms")).build();
 	}
 
 }
