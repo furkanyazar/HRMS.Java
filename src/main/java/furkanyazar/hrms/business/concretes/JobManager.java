@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import furkanyazar.hrms.business.abstracts.JobService;
 import furkanyazar.hrms.core.utilities.results.DataResult;
+import furkanyazar.hrms.core.utilities.results.ErrorResult;
 import furkanyazar.hrms.core.utilities.results.Result;
 import furkanyazar.hrms.core.utilities.results.SuccessDataResult;
 import furkanyazar.hrms.core.utilities.results.SuccessResult;
@@ -31,8 +32,17 @@ public class JobManager implements JobService {
 
 	@Override
 	public Result add(Job job) {
+		if (findByName(job.getName()).getData().size() != 0){
+			return new ErrorResult("İş zaten ekli");
+		}
+		
 		jobDao.save(job);
 		return new SuccessResult("İş eklendi");
+	}
+
+	@Override
+	public DataResult<List<Job>> findByName(String name) {
+		return new SuccessDataResult<List<Job>>(jobDao.findByName(name), "Ada göre listelendi");
 	}
 
 }

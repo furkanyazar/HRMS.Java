@@ -9,36 +9,31 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import furkanyazar.hrms.business.abstracts.JobService;
+import furkanyazar.hrms.business.abstracts.StaffService;
 import furkanyazar.hrms.core.utilities.results.DataResult;
 import furkanyazar.hrms.core.utilities.results.Result;
-import furkanyazar.hrms.entities.concretes.Job;
+import furkanyazar.hrms.entities.concretes.Staff;
 
 @RestController
-@RequestMapping("/api/jobs")
-public class JobsController {
+@RequestMapping("/api/staffs")
+public class StaffController {
 	
-	private JobService jobService;
+	private StaffService staffService;
 
 	@Autowired
-	public JobsController(JobService jobService) {
+	public StaffController(StaffService staffService) {
 		super();
-		this.jobService = jobService;
-	}
-	
-	@GetMapping("/getall")
-	public DataResult<List<Job>> getAll() {
-		return jobService.getAll();
+		this.staffService = staffService;
 	}
 	
 	@PostMapping("/add")
-	public Result add(@RequestBody Job job) {
-		return jobService.add(job);
+	public Result add(@RequestBody Staff staff) {
+		return staffService.add(staff);
 	}
 	
-	@GetMapping("/findbyname")
-	public DataResult<List<Job>> findByName(String name) {
-		return jobService.findByName(name);
+	@GetMapping("/getall")
+	public DataResult<List<Staff>> getAll() {
+		return staffService.getAll();
 	}
 
 }

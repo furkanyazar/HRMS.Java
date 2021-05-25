@@ -4,13 +4,13 @@ import java.util.List;
 
 import furkanyazar.hrms.core.utilities.results.DataResult;
 import furkanyazar.hrms.core.utilities.results.Result;
-import furkanyazar.hrms.entities.concretes.Job;
+import furkanyazar.hrms.entities.concretes.Staff;
 
-public interface JobService {
+public interface StaffService {
 	
-	DataResult<List<Job>> getAll();
-	DataResult<List<Job>> findByName(String name);
+	DataResult<List<Staff>> getAll();
+	DataResult<Boolean> confirmEmployer();
 	
-	Result add(Job job);
+	Result add(Staff staff);
 
 }
