@@ -10,6 +10,8 @@ public interface ExperienceService {
 
 	DataResult<List<Experience>> findByUserIdOrderByEndingDateDesc(int userId);
 
+	DataResult<List<Experience>> findByUserId(int userId);
+
 	Result add(Experience experience);
 
 }

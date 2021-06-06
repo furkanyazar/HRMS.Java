@@ -35,5 +35,10 @@ public class EducationsController {
 	public DataResult<List<Education>> findByUserIdOrderByEndingDateDesc(int userId) {
 		return educationService.findByUserIdOrderByEndingDateDesc(userId);
 	}
+
+	@GetMapping("/findByUserId")
+	public DataResult<List<Education>> findByUserId(int userId) {
+		return educationService.findByUserId(userId);
+	}
 	
 }

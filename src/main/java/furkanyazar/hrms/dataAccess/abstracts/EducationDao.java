@@ -10,4 +10,6 @@ public interface EducationDao extends JpaRepository<Education, Integer> {
 	
 	List<Education> findByUserIdOrderByEndingDateDesc(int userId);
 
+	List<Education> findByUserId(int userId);
+
 }

@@ -36,4 +36,9 @@ public class ExperiencesController {
 		return experienceService.findByUserIdOrderByEndingDateDesc(userId);
 	}
 
+	@GetMapping("/findByUserId")
+	public DataResult<List<Experience>> findByUserId(int userId) {
+		return experienceService.findByUserId(userId);
+	}
+
 }

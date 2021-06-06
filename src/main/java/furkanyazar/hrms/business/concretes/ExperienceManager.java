@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import furkanyazar.hrms.business.abstracts.ExperienceService;
 import furkanyazar.hrms.core.utilities.results.DataResult;
 import furkanyazar.hrms.core.utilities.results.Result;
+import furkanyazar.hrms.core.utilities.results.SuccessDataResult;
 import furkanyazar.hrms.dataAccess.abstracts.ExperienceDao;
 import furkanyazar.hrms.entities.concretes.Experience;
 
@@ -31,6 +32,11 @@ public class ExperienceManager implements ExperienceService {
 	public Result add(Experience experience) {
 		experienceDao.save(experience);
 		return new Result(true, "Deneyim eklendi");
+	}
+
+	@Override
+	public DataResult<List<Experience>> findByUserId(int userId) {
+		return new SuccessDataResult<List<Experience>>(experienceDao.findByUserId(userId), "Data döndü");
 	}
 
 }

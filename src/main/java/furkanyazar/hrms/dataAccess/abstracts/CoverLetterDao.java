@@ -6,4 +6,6 @@ import furkanyazar.hrms.entities.concretes.CoverLetter;
 
 public interface CoverLetterDao extends JpaRepository<CoverLetter, Integer> {
 
+    CoverLetter findByUserId(int userId);
+
 }

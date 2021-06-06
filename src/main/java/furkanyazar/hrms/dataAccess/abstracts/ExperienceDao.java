@@ -10,4 +10,6 @@ public interface ExperienceDao extends JpaRepository<Experience, Integer> {
 	
 	List<Experience> findByUserIdOrderByEndingDateDesc(int userId);
 
+	List<Experience> findByUserId(int userId);
+
 }

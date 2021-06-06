@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import furkanyazar.hrms.business.abstracts.CoverLetterService;
+import furkanyazar.hrms.core.utilities.results.DataResult;
 import furkanyazar.hrms.core.utilities.results.Result;
+import furkanyazar.hrms.core.utilities.results.SuccessDataResult;
 import furkanyazar.hrms.dataAccess.abstracts.CoverLetterDao;
 import furkanyazar.hrms.entities.concretes.CoverLetter;
 
@@ -23,6 +25,11 @@ public class CoverLetterManager implements CoverLetterService {
 	public Result add(CoverLetter coverLetter) {
 		coverLetterDao.save(coverLetter);
 		return new Result(true, "Önyazı eklendi");
+	}
+
+	@Override
+	public DataResult<CoverLetter> findByUserId(int userId) {
+		return new SuccessDataResult<CoverLetter>(coverLetterDao.findByUserId(userId), "Data döndü");
 	}
 
 }

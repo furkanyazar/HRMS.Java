@@ -9,6 +9,8 @@ import furkanyazar.hrms.entities.concretes.Education;
 public interface EducationService {
 	
 	DataResult<List<Education>> findByUserIdOrderByEndingDateDesc(int userId);
+
+	DataResult<List<Education>> findByUserId(int userId);
 	
 	Result add(Education education);
 

@@ -1,11 +1,13 @@
 package furkanyazar.hrms.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import furkanyazar.hrms.business.abstracts.CoverLetterService;
+import furkanyazar.hrms.core.utilities.results.DataResult;
 import furkanyazar.hrms.core.utilities.results.Result;
 import furkanyazar.hrms.entities.concretes.CoverLetter;
 
@@ -24,6 +26,11 @@ public class CoverLettersController {
 	@PostMapping("/add")
 	public Result add(CoverLetter coverLetter) {
 		return coverLetterService.add(coverLetter);
+	}
+
+	@GetMapping("findByUserId")
+	public DataResult<CoverLetter> findByUserId(int userId) {
+		return coverLetterService.findByUserId(userId);
 	}
 	
 }

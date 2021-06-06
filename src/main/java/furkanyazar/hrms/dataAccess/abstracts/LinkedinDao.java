@@ -6,4 +6,6 @@ import furkanyazar.hrms.entities.concretes.Linkedin;
 
 public interface LinkedinDao extends JpaRepository<Linkedin, Integer> {
 
+    Linkedin findByUserId(int userId);
+
 }

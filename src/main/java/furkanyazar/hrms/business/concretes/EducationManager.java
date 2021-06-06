@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import furkanyazar.hrms.business.abstracts.EducationService;
 import furkanyazar.hrms.core.utilities.results.DataResult;
 import furkanyazar.hrms.core.utilities.results.Result;
+import furkanyazar.hrms.core.utilities.results.SuccessDataResult;
 import furkanyazar.hrms.dataAccess.abstracts.EducationDao;
 import furkanyazar.hrms.entities.concretes.Education;
 
@@ -30,7 +31,12 @@ public class EducationManager implements EducationService {
 
 	@Override
 	public DataResult<List<Education>> findByUserIdOrderByEndingDateDesc(int userId) {
-		return new DataResult<List<Education>>(educationDao.findByUserIdOrderByEndingDateDesc(userId), true, "Eğitim sıralandı");
+		return new SuccessDataResult<List<Education>>(educationDao.findByUserIdOrderByEndingDateDesc(userId), "Eğitim sıralandı");
+	}
+
+	@Override
+	public DataResult<List<Education>> findByUserId(int userId) {
+		return new SuccessDataResult<List<Education>>(educationDao.findByUserId(userId), "Data döndü");
 	}
 
 }
