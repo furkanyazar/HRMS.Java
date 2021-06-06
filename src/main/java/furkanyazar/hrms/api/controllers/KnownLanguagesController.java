@@ -1,0 +1,30 @@
+package furkanyazar.hrms.api.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import furkanyazar.hrms.business.abstracts.KnownLanguageService;
+import furkanyazar.hrms.core.utilities.results.Result;
+import furkanyazar.hrms.entities.concretes.KnownLanguage;
+
+@RestController
+@RequestMapping("/api/knownlanguages")
+public class KnownLanguagesController {
+	
+	private KnownLanguageService knownLanguageService;
+
+	@Autowired
+	public KnownLanguagesController(KnownLanguageService knownLanguageService) {
+		super();
+		this.knownLanguageService = knownLanguageService;
+	}
+	
+	@PostMapping("/add")
+	public Result add(@RequestBody KnownLanguage knownLanguage) {
+		return knownLanguageService.add(knownLanguage);
+	}
+
+}

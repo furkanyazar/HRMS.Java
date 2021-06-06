@@ -15,11 +15,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "jobs")
+@Table(name = "departments")
 @Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Job {
+public class Department {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,6 +27,6 @@ public class Job {
 	private int id;
 	
 	@Column(name = "name")
-	private String name;
+	private String email;
 
 }

@@ -15,18 +15,18 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "jobs")
+@Table(name = "schools")
 @Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Job {
+public class School {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
-	
-	@Column(name = "name")
-	private String name;
+    private int id;
+
+    @Column(name = "name")
+    private String name;
 
 }

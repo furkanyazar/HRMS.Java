@@ -15,11 +15,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @Entity
-@Table(name = "jobs")
+@Table(name = "languages")
 @Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @NoArgsConstructor
-public class Job {
+public class Language {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
