@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 // @Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobPostings"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "ownedSkills", "knownLanguages", "experiences", "jobPostings", "activations", "activationEmployers", "educations"})
 public class User {
 	
 	@Id
@@ -37,6 +37,24 @@ public class User {
 	private String password;
 	
 	@OneToMany(mappedBy = "user")
-	List<JobPosting> jobPostings;
+	private List<JobPosting> jobPostings;
+
+	@OneToMany(mappedBy = "user")
+	private List<Activation> activations;
+
+	@OneToMany(mappedBy = "user")
+	private List<ActivationEmployer> activationEmployers;
+
+	@OneToMany(mappedBy = "user")
+	private List<Education> educations;
+
+	@OneToMany(mappedBy = "user")
+	private List<Experience> experiences;
+
+	@OneToMany(mappedBy = "user")
+	private List<KnownLanguage> knownLanguages;
+
+	@OneToMany(mappedBy = "user")
+	private List<OwnedSkill> ownedSkills;
 
 }

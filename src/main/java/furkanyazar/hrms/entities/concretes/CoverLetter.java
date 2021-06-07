@@ -20,9 +20,9 @@ public class CoverLetter {
 	
 	@Id
 	@Column(name = "user_id")
-	int userId;
+	private int userId;
 	
 	@Column(name = "article")
-	String article;
+	private String article;
 
 }
