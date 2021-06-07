@@ -34,7 +34,7 @@ public class ActivationManager implements ActivationService {
 	public Result add(Activation activation, User user) {
 		activation.setActivationCode(ActivationCodeCreator.createRandomCode());
 		activation.setIsActivated(false);
-		activation.setUserId(user.getId());
+		activation.setUser(user);
 		activationDao.save(activation);
 		return new Result(true, "Aktivasyon eklendi");
 	}

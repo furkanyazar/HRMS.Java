@@ -32,7 +32,7 @@ public class ActivationEmployerManager implements ActivationEmployerService {
 	@Override
 	public Result add(ActivationEmployer activationEmployer, User user) {
 		activationEmployer.setIsActivated(false);
-		activationEmployer.setUserId(user.getId());
+		activationEmployer.setUser(user);
 		activationEmployerDao.save(activationEmployer);
 		return new Result(true, "Aktivasyon eklendi");
 	}
