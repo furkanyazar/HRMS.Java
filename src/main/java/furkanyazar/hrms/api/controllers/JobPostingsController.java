@@ -29,8 +29,8 @@ public class JobPostingsController {
 	}
 
     @GetMapping("/getByIsActivated")
-	public DataResult<List<JobPosting>> getByIsActivated() {
-		return jobPostingService.getByIsActivated(true);
+	public DataResult<List<JobPosting>> getByIsActivated(Boolean isActivated) {
+		return jobPostingService.getByIsActivated(isActivated);
 	}
 
 	@GetMapping("getById")
