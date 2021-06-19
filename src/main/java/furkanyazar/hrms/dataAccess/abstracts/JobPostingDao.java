@@ -12,9 +12,9 @@ public interface JobPostingDao extends JpaRepository<JobPosting, Integer> {
 
     List<JobPosting> getByIsActivated(Boolean isActivated);
 
-    List<JobPosting> getByIsActivatedOrderByApplicationDeadlineAsc(Boolean isActivated);
+    List<JobPosting> getByIsActivatedOrderByLastDateAsc(Boolean isActivated);
 
-    List<JobPosting> getByIsActivatedOrderByApplicationDeadlineDesc(Boolean isActivated);
+    List<JobPosting> getByIsActivatedOrderByLastDateDesc(Boolean isActivated);
 
     List<JobPosting> getByIsActivatedAndUserId(Boolean isActivated, int userId);
 

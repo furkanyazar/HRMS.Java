@@ -15,6 +15,7 @@ import furkanyazar.hrms.core.utilities.results.ErrorResult;
 import furkanyazar.hrms.core.utilities.results.Result;
 import furkanyazar.hrms.core.utilities.results.SuccessDataResult;
 import furkanyazar.hrms.core.utilities.results.SuccessResult;
+import furkanyazar.hrms.dataAccess.abstracts.ActivationEmployerDao;
 import furkanyazar.hrms.dataAccess.abstracts.EmployerDao;
 import furkanyazar.hrms.entities.concretes.ActivationEmployer;
 import furkanyazar.hrms.entities.concretes.Employer;
@@ -25,13 +26,15 @@ public class EmployerManager implements EmployerService {
 	private EmployerDao employerDao;
 	private ActivationEmployerService activationEmployerService;
 	private EmailService emailService;
+	private ActivationEmployerDao activationEmployerDao;
 
 	@Autowired
-	public EmployerManager(EmployerDao employerDao, ActivationEmployerService activationEmployerService, EmailService emailService) {
+	public EmployerManager(EmployerDao employerDao, ActivationEmployerService activationEmployerService, EmailService emailService, ActivationEmployerDao activationEmployerDao) {
 		super();
 		this.employerDao = employerDao;
 		this.activationEmployerService = activationEmployerService;
 		this.emailService = emailService;
+		this.activationEmployerDao = activationEmployerDao;
 	}
 
 	@Override
@@ -73,6 +76,20 @@ public class EmployerManager implements EmployerService {
 	@Override
 	public DataResult<Boolean> confirmEmail() {
 		return new SuccessDataResult<Boolean>("Email onaylandı");
+	}
+
+	@Override
+	public DataResult<Employer> getById(int id) {
+		return new SuccessDataResult<Employer>(employerDao.getById(id), "İş veren detayları listelendi");
+	}
+
+	@Override
+	public Result setIsActivated(ActivationEmployer activationEmployer, Employer employer, Boolean isActivated, int id) {
+		employer = getById(id).getData();
+		activationEmployer = activationEmployerService.getByUserId(employer.getId()).getData();
+		activationEmployer.setIsActivated(isActivated);
+		activationEmployerDao.save(activationEmployer);
+		return new Result(true, "İş veren aktiflik durumu değiştirildi");
 	}
 
 }

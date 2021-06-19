@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 // @Inheritance(strategy = InheritanceType.JOINED)
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "jobPostings", "experiences"})
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler", "experiences", "jobPostings"})
 public class Job {
 	
 	@Id
@@ -34,9 +34,9 @@ public class Job {
 	private String name;
 
 	@OneToMany(mappedBy = "job")
-	private List<JobPosting> jobPostings;
+	private List<Experience> experiences;
 
 	@OneToMany(mappedBy = "job")
-	private List<Experience> experiences;
+	private List<JobPosting> jobPostings;
 
 }

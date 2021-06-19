@@ -49,8 +49,8 @@ public class JobPosting {
     @Column(name = "open_position")
     private int openPosition;
 
-    @Column(name = "application_deadline")
-    private Date applicationDeadline;
+    @Column(name = "last_date")
+    private Date lastDate;
 
     @Column(name = "is_activated")
     private Boolean isActivated;
@@ -66,5 +66,13 @@ public class JobPosting {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "working_time_id")
+    private WorkingTime workingTime;
+
+    @ManyToOne
+    @JoinColumn(name = "workplace_id")
+    private Workplace workplace;
 
 }

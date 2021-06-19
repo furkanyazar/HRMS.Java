@@ -6,4 +6,6 @@ import furkanyazar.hrms.entities.concretes.ActivationEmployer;
 
 public interface ActivationEmployerDao extends JpaRepository<ActivationEmployer, Integer>  {
 	
+    ActivationEmployer getByUserId(int id);
+
 }

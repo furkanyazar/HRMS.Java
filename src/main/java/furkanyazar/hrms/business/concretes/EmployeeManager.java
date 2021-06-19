@@ -89,4 +89,9 @@ public class EmployeeManager implements EmployeeService {
 		return new SuccessDataResult<Boolean>("Email onaylandı");
 	}
 
+	@Override
+	public DataResult<Employee> findById(int id) {
+		return new SuccessDataResult<Employee>(employeeDao.findById(id), "Kullanıcı listelendi");
+	}
+
 }

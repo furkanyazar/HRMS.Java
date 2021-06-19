@@ -30,12 +30,12 @@ public class JobPostingManager implements JobPostingService {
 
     @Override
     public DataResult<List<JobPosting>> getByIsActivatedOrderByApplicationDeadlineAsc(Boolean isActivated) {
-        return new SuccessDataResult<List<JobPosting>>(jobPostingDao.getByIsActivatedOrderByApplicationDeadlineAsc(isActivated), "Aktif iş pozisyonları artan tarihe göre listelendi");
+        return new SuccessDataResult<List<JobPosting>>(jobPostingDao.getByIsActivatedOrderByLastDateAsc(isActivated), "Aktif iş pozisyonları artan tarihe göre listelendi");
     }
 
     @Override
     public DataResult<List<JobPosting>> getByIsActivatedOrderByApplicationDeadlineDesc(Boolean isActivated) {
-        return new SuccessDataResult<List<JobPosting>>(jobPostingDao.getByIsActivatedOrderByApplicationDeadlineDesc(isActivated), "Aktif iş pozisyonları düşen tarihe göre listelendi");
+        return new SuccessDataResult<List<JobPosting>>(jobPostingDao.getByIsActivatedOrderByLastDateDesc(isActivated), "Aktif iş pozisyonları düşen tarihe göre listelendi");
     }
 
     @Override
@@ -50,13 +50,13 @@ public class JobPostingManager implements JobPostingService {
     }
 
     @Override
-    public JobPosting getById(int id) {
-        return jobPostingDao.getById(id);
+    public DataResult<JobPosting> getById(int id) {
+        return new SuccessDataResult<JobPosting>(jobPostingDao.getById(id), "İlan detayları listelendi");
     }
 
     @Override
     public Result setIsActivated(JobPosting jobPosting, Boolean isActivated, int id) {
-        jobPosting = getById(id);
+        jobPosting = getById(id).getData();
         jobPosting.setIsActivated(isActivated);
         jobPostingDao.save(jobPosting);
         return new Result(true, "İş aktiflik durumu güncellendi");

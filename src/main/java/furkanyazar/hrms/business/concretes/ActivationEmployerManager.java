@@ -37,4 +37,9 @@ public class ActivationEmployerManager implements ActivationEmployerService {
 		return new Result(true, "Aktivasyon eklendi");
 	}
 
+	@Override
+	public DataResult<ActivationEmployer> getByUserId(int id) {
+		return new SuccessDataResult<ActivationEmployer>(activationEmployerDao.getByUserId(id));
+	}
+
 }

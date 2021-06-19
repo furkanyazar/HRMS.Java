@@ -1,6 +1,7 @@
 package furkanyazar.hrms.api.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import furkanyazar.hrms.entities.concretes.Github;
 
 @RestController
 @RequestMapping("/api/githubs")
+@CrossOrigin
 public class GithubsController {
 	
 	private GithubService githubService;

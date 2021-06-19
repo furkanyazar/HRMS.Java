@@ -8,7 +8,7 @@ import furkanyazar.hrms.entities.concretes.JobPosting;
 
 public interface JobPostingService {
 
-    JobPosting getById(int id);
+    DataResult<JobPosting> getById(int id);
 
     DataResult<List<JobPosting>> getByIsActivated(Boolean isActivated);
 

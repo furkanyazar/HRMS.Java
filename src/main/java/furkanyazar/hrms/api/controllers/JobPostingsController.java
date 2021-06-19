@@ -33,6 +33,11 @@ public class JobPostingsController {
 		return jobPostingService.getByIsActivated(true);
 	}
 
+	@GetMapping("getById")
+	public DataResult<JobPosting> getById(int id) {
+		return jobPostingService.getById(id);
+	}
+
     @GetMapping("/getByIsActivatedOrderByApplicationDeadlineAsc")
 	public DataResult<List<JobPosting>> getByIsActivatedOrderByApplicationDeadlineAsc() {
 		return jobPostingService.getByIsActivatedOrderByApplicationDeadlineAsc(true);

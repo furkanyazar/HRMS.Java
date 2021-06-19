@@ -31,7 +31,7 @@ public class Department {
 	private int id;
 	
 	@Column(name = "name")
-	private String email;
+	private String name;
 
 	@OneToMany(mappedBy = "department")
 	private List<Education> educations;

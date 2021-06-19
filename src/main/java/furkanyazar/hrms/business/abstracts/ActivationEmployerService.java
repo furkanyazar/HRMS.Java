@@ -13,4 +13,6 @@ public interface ActivationEmployerService {
 	
 	Result add(ActivationEmployer activationEmployer, User user);
 
+	DataResult<ActivationEmployer> getByUserId(int id);
+
 }

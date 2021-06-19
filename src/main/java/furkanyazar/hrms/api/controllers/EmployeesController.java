@@ -3,6 +3,7 @@ package furkanyazar.hrms.api.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import furkanyazar.hrms.entities.concretes.Employee;
 
 @RestController
 @RequestMapping("/api/employees")
+@CrossOrigin
 public class EmployeesController {
 	
 	private EmployeeService employeeService;
@@ -44,6 +46,11 @@ public class EmployeesController {
 	@GetMapping("/findbyidentitynumber")
 	public DataResult<List<Employee>> findByIdentityNumber(String identityNumber) {
 		return employeeService.findByIdentityNumber(identityNumber);
+	}
+
+	@GetMapping("findbyid")
+	public DataResult<Employee> findById(int id) {
+		return employeeService.findById(id);
 	}
 
 }
