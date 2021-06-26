@@ -7,10 +7,13 @@ import furkanyazar.hrms.core.utilities.results.Result;
 import furkanyazar.hrms.entities.concretes.Staff;
 
 public interface StaffService {
-	
+
 	DataResult<List<Staff>> getAll();
+
 	DataResult<Boolean> confirmEmployer();
-	
+
 	Result add(Staff staff);
+
+	DataResult<Staff> findByEmailAndPassword(String email, String password);
 
 }

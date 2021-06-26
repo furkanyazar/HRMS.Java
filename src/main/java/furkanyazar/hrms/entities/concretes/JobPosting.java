@@ -43,8 +43,11 @@ public class JobPosting {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "salary_range")
-    private String salaryRange;
+    @Column(name = "min_salary")
+    private int minSalary;
+
+    @Column(name = "max_salary")
+    private int maxSalary;
 
     @Column(name = "open_position")
     private int openPosition;

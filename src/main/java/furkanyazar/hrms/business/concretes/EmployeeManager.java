@@ -94,4 +94,9 @@ public class EmployeeManager implements EmployeeService {
 		return new SuccessDataResult<Employee>(employeeDao.findById(id), "Kullanıcı listelendi");
 	}
 
+	@Override
+	public DataResult<Employee> findByEmailAndPassword(String email, String password) {
+		return new SuccessDataResult<Employee>(employeeDao.findByEmailAndPassword(email, password));
+	}
+
 }

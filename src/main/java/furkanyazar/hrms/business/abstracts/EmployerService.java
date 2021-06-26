@@ -21,4 +21,6 @@ public interface EmployerService {
 
 	Result setIsActivated(ActivationEmployer activationEmployer, Employer employer, Boolean isActivated, int id);
 
+	DataResult<Employer> findByEmailAndPassword(String email, String password);
+
 }

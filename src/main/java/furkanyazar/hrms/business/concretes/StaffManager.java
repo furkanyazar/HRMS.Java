@@ -38,5 +38,10 @@ public class StaffManager implements StaffService {
 	public DataResult<Boolean> confirmEmployer() {
 		return new SuccessDataResult<Boolean>("İş veren onaylandı");
 	}
+
+	@Override
+	public DataResult<Staff> findByEmailAndPassword(String email, String password) {
+		return new SuccessDataResult<Staff>(staffDao.findByEmailAndPassword(email, password), "Çalışan listelendi");
+	}
 	
 }

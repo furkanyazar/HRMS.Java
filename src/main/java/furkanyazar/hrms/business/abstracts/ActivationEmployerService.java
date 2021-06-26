@@ -15,4 +15,8 @@ public interface ActivationEmployerService {
 
 	DataResult<ActivationEmployer> getByUserId(int id);
 
+	DataResult<List<ActivationEmployer>> findByIsActivated(Boolean isActivated);
+
+	DataResult<ActivationEmployer> findByIsActivatedAndUser_EmailAndUser_Password(Boolean isActivated, String email, String password);
+
 }

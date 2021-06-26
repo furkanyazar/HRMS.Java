@@ -54,4 +54,9 @@ public class EmployersController {
 		return employerService.setIsActivated(new ActivationEmployer(), new Employer(), isActivated, id);
 	}
 
+	@GetMapping("/findbyemailandpassword")
+	public DataResult<Employer> findByEmailAndPassword(String email, String password) {
+		return employerService.findByEmailAndPassword(email, password);
+	}
+
 }

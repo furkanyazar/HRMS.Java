@@ -38,4 +38,9 @@ public class StaffController {
 		return staffService.getAll();
 	}
 
+	@GetMapping("findbyemailandpassword")
+	public DataResult<Staff> findByEmail(String email, String password) {
+		return staffService.findByEmailAndPassword(email, password);
+	}
+
 }

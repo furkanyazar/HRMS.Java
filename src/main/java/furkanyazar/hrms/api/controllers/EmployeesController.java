@@ -53,4 +53,9 @@ public class EmployeesController {
 		return employeeService.findById(id);
 	}
 
+	@GetMapping("findbyemailandpassword")
+	public DataResult<Employee> findByEmailAndPassword(String email, String password) {
+		return employeeService.findByEmailAndPassword(email, password);
+	}
+
 }

@@ -22,4 +22,6 @@ public interface EmployeeService {
 
     Result add(Employee employee);
 
+    DataResult<Employee> findByEmailAndPassword(String email, String password);
+
 }

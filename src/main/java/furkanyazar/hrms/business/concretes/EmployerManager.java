@@ -92,4 +92,9 @@ public class EmployerManager implements EmployerService {
 		return new Result(true, "İş veren aktiflik durumu değiştirildi");
 	}
 
+	@Override
+	public DataResult<Employer> findByEmailAndPassword(String email, String password) {
+		return new SuccessDataResult<Employer>(employerDao.findByEmailAndPassword(email, password));
+	}
+
 }

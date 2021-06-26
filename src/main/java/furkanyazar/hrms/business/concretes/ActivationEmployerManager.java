@@ -42,4 +42,15 @@ public class ActivationEmployerManager implements ActivationEmployerService {
 		return new SuccessDataResult<ActivationEmployer>(activationEmployerDao.getByUserId(id));
 	}
 
+	@Override
+	public DataResult<List<ActivationEmployer>> findByIsActivated(Boolean isActivated) {
+		return new SuccessDataResult<List<ActivationEmployer>>(activationEmployerDao.findByIsActivated(isActivated));
+	}
+
+	@Override
+	public DataResult<ActivationEmployer> findByIsActivatedAndUser_EmailAndUser_Password(Boolean isActivated,
+			String email, String password) {
+		return new SuccessDataResult<ActivationEmployer>(activationEmployerDao.findByIsActivatedAndUser_EmailAndUser_Password(isActivated, email, password));
+	}
+
 }
