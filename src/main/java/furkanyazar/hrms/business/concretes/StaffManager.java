@@ -14,7 +14,7 @@ import furkanyazar.hrms.entities.concretes.Staff;
 
 @Service
 public class StaffManager implements StaffService {
-	
+
 	private StaffDao staffDao;
 
 	@Autowired
@@ -43,5 +43,27 @@ public class StaffManager implements StaffService {
 	public DataResult<Staff> findByEmailAndPassword(String email, String password) {
 		return new SuccessDataResult<Staff>(staffDao.findByEmailAndPassword(email, password), "Çalışan listelendi");
 	}
-	
+
+	@Override
+	public DataResult<Staff> findById(int id) {
+		return new SuccessDataResult<Staff>(staffDao.findById(id));
+	}
+
+	@Override
+	public Result edit(Staff staff, int id) {
+		try {
+			Staff tempStaff = findById(id).getData();
+
+			tempStaff.setName(staff.getName());
+			tempStaff.setSurname(staff.getSurname());
+			tempStaff.setEmail(staff.getEmail());
+
+			staffDao.save(tempStaff);
+
+			return new Result(true, "Bilgiler kaydedildi");
+		} catch (Exception e) {
+			return new Result(false, "Bir hata oluştu");
+		}
+	}
+
 }

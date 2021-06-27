@@ -9,6 +9,7 @@ import furkanyazar.hrms.core.utilities.results.Result;
 import furkanyazar.hrms.core.utilities.results.SuccessDataResult;
 import furkanyazar.hrms.dataAccess.abstracts.PhotoDao;
 import furkanyazar.hrms.entities.concretes.Photo;
+import furkanyazar.hrms.entities.concretes.User;
 
 @Service
 public class PhotoManager implements PhotoService {
@@ -22,7 +23,9 @@ public class PhotoManager implements PhotoService {
 	}
 
 	@Override
-	public Result add(Photo photo) {
+	public Result add(Photo photo, User user) {
+		photo.setPhotoLink("https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png");
+		photo.setUser(user);
 		photoDao.save(photo);
 		return new Result(true, "Resim yüklendi");
 	}

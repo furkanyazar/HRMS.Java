@@ -59,4 +59,9 @@ public class EmployersController {
 		return employerService.findByEmailAndPassword(email, password);
 	}
 
+	@PostMapping("/edit")
+	public Result edit(@RequestBody Employer employer, int id) {
+		return employerService.edit(employer, id);
+	}
+
 }

@@ -58,4 +58,9 @@ public class EmployeesController {
 		return employeeService.findByEmailAndPassword(email, password);
 	}
 
+	@PostMapping("/edit")
+	public Result edit(String coverLetter, String github, String linkedin, @RequestBody Employee employee, int id) {
+		return employeeService.edit(coverLetter, github, linkedin, employee, id);
+	}
+
 }

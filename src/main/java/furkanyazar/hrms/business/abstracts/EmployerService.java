@@ -23,4 +23,6 @@ public interface EmployerService {
 
 	DataResult<Employer> findByEmailAndPassword(String email, String password);
 
+	Result edit(Employer employer, int id);
+
 }

@@ -7,8 +7,12 @@ import org.springframework.stereotype.Service;
 
 import furkanyazar.hrms.adapters.UserCheckService;
 import furkanyazar.hrms.business.abstracts.ActivationService;
+import furkanyazar.hrms.business.abstracts.CoverLetterService;
 import furkanyazar.hrms.business.abstracts.EmailService;
 import furkanyazar.hrms.business.abstracts.EmployeeService;
+import furkanyazar.hrms.business.abstracts.GithubService;
+import furkanyazar.hrms.business.abstracts.LinkedinService;
+import furkanyazar.hrms.business.abstracts.PhotoService;
 import furkanyazar.hrms.business.concretes.helpers.EmployeeCheckHelper;
 import furkanyazar.hrms.core.utilities.results.DataResult;
 import furkanyazar.hrms.core.utilities.results.ErrorResult;
@@ -17,7 +21,11 @@ import furkanyazar.hrms.core.utilities.results.SuccessDataResult;
 import furkanyazar.hrms.core.utilities.results.SuccessResult;
 import furkanyazar.hrms.dataAccess.abstracts.EmployeeDao;
 import furkanyazar.hrms.entities.concretes.Activation;
+import furkanyazar.hrms.entities.concretes.CoverLetter;
 import furkanyazar.hrms.entities.concretes.Employee;
+import furkanyazar.hrms.entities.concretes.Github;
+import furkanyazar.hrms.entities.concretes.Linkedin;
+import furkanyazar.hrms.entities.concretes.Photo;
 
 @Service
 public class EmployeeManager implements EmployeeService {
@@ -26,14 +34,22 @@ public class EmployeeManager implements EmployeeService {
 	private ActivationService activationService;
 	private UserCheckService userCheckService;
 	private EmailService emailService;
+	private CoverLetterService coverLetterService;
+	private GithubService githubService;
+	private LinkedinService linkedinService;
+	private PhotoService photoService;
 
 	@Autowired
-	public EmployeeManager(EmployeeDao employeeDao, ActivationService activationService, UserCheckService userCheckService, EmailService emailService) {
+	public EmployeeManager(EmployeeDao employeeDao, ActivationService activationService, UserCheckService userCheckService, EmailService emailService, CoverLetterService coverLetterService, GithubService githubService, LinkedinService linkedinService, PhotoService photoService) {
 		super();
 		this.employeeDao = employeeDao;
 		this.activationService = activationService;
 		this.userCheckService = userCheckService;
 		this.emailService = emailService;
+		this.coverLetterService = coverLetterService;
+		this.githubService = githubService;
+		this.linkedinService = linkedinService;
+		this.photoService = photoService;
 	}
 
 	@Override
@@ -81,6 +97,10 @@ public class EmployeeManager implements EmployeeService {
 
 		employeeDao.save(employee);
 		activationService.add(new Activation(), employee);
+		coverLetterService.add(new CoverLetter(), employee);
+		githubService.add(new Github(), employee);
+		linkedinService.add(new Linkedin(), employee);
+		photoService.add(new Photo(), employee);
 		return new SuccessResult(emailService.sendEmail(employee).getMessage());
 	}
 
@@ -97,6 +117,28 @@ public class EmployeeManager implements EmployeeService {
 	@Override
 	public DataResult<Employee> findByEmailAndPassword(String email, String password) {
 		return new SuccessDataResult<Employee>(employeeDao.findByEmailAndPassword(email, password));
+	}
+
+	@Override
+	public Result edit(String coverLetter, String github, String linkedin, Employee employee, int id) {
+		try {
+			Employee tempEmployee = findById(id).getData();
+
+			tempEmployee.setName(employee.getName());
+			tempEmployee.setSurname(employee.getSurname());
+			tempEmployee.setEmail(employee.getEmail());
+			tempEmployee.setDateOfBirth(employee.getDateOfBirth());
+
+			coverLetterService.edit(coverLetter, id);
+			githubService.edit(github, id);
+			linkedinService.edit(linkedin, id);
+
+			employeeDao.save(tempEmployee);
+
+			return new Result(true, "Bilgiler kaydedildi");
+		} catch (Exception e) {
+			return new Result(false, "Bir hata oluştu");
+		}
 	}
 
 }

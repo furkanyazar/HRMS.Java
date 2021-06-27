@@ -16,4 +16,8 @@ public interface StaffService {
 
 	DataResult<Staff> findByEmailAndPassword(String email, String password);
 
+	DataResult<Staff> findById(int id);
+
+	Result edit(Staff staff, int id);
+
 }

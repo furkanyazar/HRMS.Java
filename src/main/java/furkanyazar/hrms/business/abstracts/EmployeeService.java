@@ -24,4 +24,6 @@ public interface EmployeeService {
 
     DataResult<Employee> findByEmailAndPassword(String email, String password);
 
+    Result edit(String coverLetter, String github, String linkedin, Employee employee, int id);
+
 }

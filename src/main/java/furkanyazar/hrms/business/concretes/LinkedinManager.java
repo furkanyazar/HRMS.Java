@@ -9,6 +9,7 @@ import furkanyazar.hrms.core.utilities.results.Result;
 import furkanyazar.hrms.core.utilities.results.SuccessDataResult;
 import furkanyazar.hrms.dataAccess.abstracts.LinkedinDao;
 import furkanyazar.hrms.entities.concretes.Linkedin;
+import furkanyazar.hrms.entities.concretes.User;
 
 @Service
 public class LinkedinManager implements LinkedinService {
@@ -22,7 +23,9 @@ public class LinkedinManager implements LinkedinService {
 	}
 
 	@Override
-	public Result add(Linkedin linkedin) {
+	public Result add(Linkedin linkedin, User user) {
+		linkedin.setLinkedinLink("");
+		linkedin.setUser(user);
 		linkedinDao.save(linkedin);
 		return new Result(true, "Linkedin hesabı eklendi");
 	}
@@ -30,6 +33,21 @@ public class LinkedinManager implements LinkedinService {
 	@Override
 	public DataResult<Linkedin> findByUserId(int userId) {
 		return new SuccessDataResult<Linkedin>(linkedinDao.findByUserId(userId), "Data döndü");
+	}
+
+	@Override
+	public Result edit(String linkedin, int id) {
+		try {
+			Linkedin tempLinkedin = findByUserId(id).getData();
+
+			tempLinkedin.setLinkedinLink(linkedin);
+
+			linkedinDao.save(tempLinkedin);
+
+			return new Result(true, "Bilgiler kaydedildi");
+		} catch (Exception e) {
+			return new Result(false, "Bir hata oluştu");
+		}
 	}
 
 }

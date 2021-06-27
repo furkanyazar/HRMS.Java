@@ -18,12 +18,12 @@ import furkanyazar.hrms.entities.concretes.Staff;
 @RestController
 @RequestMapping("/api/staffs")
 @CrossOrigin
-public class StaffController {
+public class StaffsController {
 	
 	private StaffService staffService;
 
 	@Autowired
-	public StaffController(StaffService staffService) {
+	public StaffsController(StaffService staffService) {
 		super();
 		this.staffService = staffService;
 	}
@@ -38,9 +38,19 @@ public class StaffController {
 		return staffService.getAll();
 	}
 
-	@GetMapping("findbyemailandpassword")
+	@GetMapping("/findbyemailandpassword")
 	public DataResult<Staff> findByEmail(String email, String password) {
 		return staffService.findByEmailAndPassword(email, password);
+	}
+
+	@GetMapping("/findbyuserid")
+	public DataResult<Staff> findByUserId(int id) {
+		return staffService.findById(id);
+	}
+
+	@PostMapping("/edit")
+	public Result edit(@RequestBody Staff staff, int id) {
+		return staffService.edit(staff, id);
 	}
 
 }

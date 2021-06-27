@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import furkanyazar.hrms.business.abstracts.ActivationEmployerService;
 import furkanyazar.hrms.business.abstracts.EmailService;
 import furkanyazar.hrms.business.abstracts.EmployerService;
+import furkanyazar.hrms.business.abstracts.PhotoService;
 import furkanyazar.hrms.business.concretes.helpers.EmailCheckHelper;
 import furkanyazar.hrms.business.concretes.helpers.EmployerCheckHelper;
 import furkanyazar.hrms.core.utilities.results.DataResult;
@@ -19,22 +20,26 @@ import furkanyazar.hrms.dataAccess.abstracts.ActivationEmployerDao;
 import furkanyazar.hrms.dataAccess.abstracts.EmployerDao;
 import furkanyazar.hrms.entities.concretes.ActivationEmployer;
 import furkanyazar.hrms.entities.concretes.Employer;
+import furkanyazar.hrms.entities.concretes.Photo;
 
 @Service
 public class EmployerManager implements EmployerService {
-	
+
 	private EmployerDao employerDao;
 	private ActivationEmployerService activationEmployerService;
 	private EmailService emailService;
 	private ActivationEmployerDao activationEmployerDao;
+	private PhotoService photoService;
 
 	@Autowired
-	public EmployerManager(EmployerDao employerDao, ActivationEmployerService activationEmployerService, EmailService emailService, ActivationEmployerDao activationEmployerDao) {
+	public EmployerManager(EmployerDao employerDao, ActivationEmployerService activationEmployerService,
+			EmailService emailService, ActivationEmployerDao activationEmployerDao, PhotoService photoService) {
 		super();
 		this.employerDao = employerDao;
 		this.activationEmployerService = activationEmployerService;
 		this.emailService = emailService;
 		this.activationEmployerDao = activationEmployerDao;
+		this.photoService = photoService;
 	}
 
 	@Override
@@ -52,7 +57,7 @@ public class EmployerManager implements EmployerService {
 		Boolean checkEmail = findByEmail(employer.getEmail()).getData().size() != 0;
 		Boolean checkFields = !EmployerCheckHelper.checkFields(employer);
 		Boolean checkIfComunity = !EmailCheckHelper.checkEmail(employer);
-		
+
 		if (checkEmail || checkFields || checkIfComunity) {
 			String errorMessage = "";
 
@@ -67,12 +72,13 @@ public class EmployerManager implements EmployerService {
 
 			return new ErrorResult(errorMessage);
 		}
-		
+
 		employerDao.save(employer);
+		photoService.add(new Photo(), employer);
 		activationEmployerService.add(new ActivationEmployer(), employer);
 		return new SuccessResult(emailService.sendEmail(employer).getMessage());
 	}
-	
+
 	@Override
 	public DataResult<Boolean> confirmEmail() {
 		return new SuccessDataResult<Boolean>("Email onaylandı");
@@ -84,7 +90,8 @@ public class EmployerManager implements EmployerService {
 	}
 
 	@Override
-	public Result setIsActivated(ActivationEmployer activationEmployer, Employer employer, Boolean isActivated, int id) {
+	public Result setIsActivated(ActivationEmployer activationEmployer, Employer employer, Boolean isActivated,
+			int id) {
 		employer = getById(id).getData();
 		activationEmployer = activationEmployerService.getByUserId(employer.getId()).getData();
 		activationEmployer.setIsActivated(isActivated);
@@ -95,6 +102,24 @@ public class EmployerManager implements EmployerService {
 	@Override
 	public DataResult<Employer> findByEmailAndPassword(String email, String password) {
 		return new SuccessDataResult<Employer>(employerDao.findByEmailAndPassword(email, password));
+	}
+
+	@Override
+	public Result edit(Employer employer, int id) {
+		try {
+			Employer tempEmployer = getById(id).getData();
+
+			tempEmployer.setCompanyName(employer.getCompanyName());
+			tempEmployer.setWebsite(employer.getWebsite());
+			tempEmployer.setEmail(employer.getEmail());
+			tempEmployer.setPhoneNumber(employer.getPhoneNumber());
+
+			employerDao.save(tempEmployer);
+
+			return new Result(true, "Bilgiler kaydedildi");
+		} catch (Exception e) {
+			return new Result(false, "Bir hata oluştu");
+		}
 	}
 
 }

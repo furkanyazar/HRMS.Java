@@ -27,7 +27,7 @@ import lombok.NoArgsConstructor;
 // @MappedSuperclass
 @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler", "activationEmployers", "activations", "coverLetters",
 		"educations", "experiences", "githubs", "jobPostings", "knownLanguages", "linkedins",
-		"ownedSkills", "photos", }) //"staffs", "employees", "employers" })
+		"ownedSkills", "photos", "favorites" }) //"staffs", "employees", "employers" })
 public class User {
 
 	@Id
@@ -82,5 +82,8 @@ public class User {
 /*
 	@OneToMany(mappedBy = "user")
 	private List<Staff> staffs;*/
+
+	@OneToMany(mappedBy = "user")
+	private List<Favorite> favorites;
 
 }
