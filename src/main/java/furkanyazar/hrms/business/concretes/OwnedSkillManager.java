@@ -34,4 +34,16 @@ public class OwnedSkillManager implements OwnedSkillService {
 		return new SuccessDataResult<List<OwnedSkill>>(ownedSkillDao.findByUserId(userId), "Data dönce");
 	}
 
+	@Override
+	public DataResult<OwnedSkill> findById(int id) {
+		return new SuccessDataResult<OwnedSkill>(ownedSkillDao.findById(id));
+	}
+
+	@Override
+	public Result remove(int id) {
+		OwnedSkill ownedSkill = findById(id).getData();
+		ownedSkillDao.delete(ownedSkill);
+		return new Result(true, "silindi");
+	}
+
 }

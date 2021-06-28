@@ -14,7 +14,7 @@ import furkanyazar.hrms.entities.concretes.Education;
 
 @Service
 public class EducationManager implements EducationService {
-	
+
 	private EducationDao educationDao;
 
 	@Autowired
@@ -31,12 +31,25 @@ public class EducationManager implements EducationService {
 
 	@Override
 	public DataResult<List<Education>> findByUserIdOrderByEndingDateDesc(int userId) {
-		return new SuccessDataResult<List<Education>>(educationDao.findByUserIdOrderByEndingDateDesc(userId), "Eğitim sıralandı");
+		return new SuccessDataResult<List<Education>>(educationDao.findByUserIdOrderByEndingDateDesc(userId),
+				"Eğitim sıralandı");
 	}
 
 	@Override
 	public DataResult<List<Education>> findByUserId(int userId) {
 		return new SuccessDataResult<List<Education>>(educationDao.findByUserId(userId), "Data döndü");
+	}
+
+	@Override
+	public Result remove(int id) {
+		Education education = findById(id).getData();
+		educationDao.delete(education);
+		return new Result(true, "silindi");
+	}
+
+	@Override
+	public DataResult<Education> findById(int id) {
+		return new SuccessDataResult<Education>(educationDao.findById(id));
 	}
 
 }

@@ -37,4 +37,14 @@ public class FavoritesController {
         return favoriteService.add(new Favorite(), userId, jobPostingId);
     }
 
+    @PostMapping("/remove")
+    public Result remove(int userId, int jobPostingId) {
+        return favoriteService.delete(userId, jobPostingId);
+    }
+
+    @GetMapping("/getfavs")
+    public DataResult<List<Favorite>> findByUserId(int id) {
+        return favoriteService.findByUserId(id);
+    }
+
 }

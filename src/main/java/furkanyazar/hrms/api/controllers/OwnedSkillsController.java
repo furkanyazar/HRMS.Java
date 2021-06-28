@@ -38,4 +38,9 @@ public class OwnedSkillsController {
 		return ownedSkillService.findByUserId(userId);
 	}
 
+	@PostMapping("/remove")
+	public Result remove(int id) {
+		return ownedSkillService.remove(id);
+	}
+
 }

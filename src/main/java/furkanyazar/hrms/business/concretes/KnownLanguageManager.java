@@ -34,4 +34,16 @@ public class KnownLanguageManager implements KnownLanguageService {
 		return new SuccessDataResult<List<KnownLanguage>>(knownLanguageDao.findByUserId(userId), "Data döndü");
 	}
 
+	@Override
+	public DataResult<KnownLanguage> findById(int id) {
+		return new SuccessDataResult<KnownLanguage>(knownLanguageDao.findById(id));
+	}
+
+	@Override
+	public Result remove(int id) {
+		KnownLanguage knownLanguage = findById(id).getData();
+		knownLanguageDao.delete(knownLanguage);
+		return new Result(true, "silindi");
+	}
+
 }

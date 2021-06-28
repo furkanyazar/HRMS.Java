@@ -10,4 +10,6 @@ public interface OwnedSkillDao extends JpaRepository<OwnedSkill, Integer> {
 
     List<OwnedSkill> findByUserId(int userId);
 
+    OwnedSkill findById(int id);
+
 }

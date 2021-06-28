@@ -42,5 +42,10 @@ public class EducationsController {
 	public DataResult<List<Education>> findByUserId(int userId) {
 		return educationService.findByUserId(userId);
 	}
+
+	@PostMapping("/remove")
+	public Result remove(int id) {
+		return educationService.remove(id);
+	}
 	
 }

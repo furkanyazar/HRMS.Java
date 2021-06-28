@@ -11,7 +11,11 @@ public interface EducationService {
 	DataResult<List<Education>> findByUserIdOrderByEndingDateDesc(int userId);
 
 	DataResult<List<Education>> findByUserId(int userId);
+
+	DataResult<Education> findById(int id);
 	
 	Result add(Education education);
+
+	Result remove(int id);
 
 }

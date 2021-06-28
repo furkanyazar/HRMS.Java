@@ -10,4 +10,6 @@ public interface KnownLanguageDao extends JpaRepository<KnownLanguage, Integer> 
 
     List<KnownLanguage> findByUserId(int userId);
 
+    KnownLanguage findById(int id);
+
 }

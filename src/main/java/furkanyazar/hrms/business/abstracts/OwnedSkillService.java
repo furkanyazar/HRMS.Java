@@ -12,4 +12,8 @@ public interface OwnedSkillService {
 
 	DataResult<List<OwnedSkill>> findByUserId(int userId);
 
+	DataResult<OwnedSkill> findById(int id);
+
+	Result remove(int id);
+
 }

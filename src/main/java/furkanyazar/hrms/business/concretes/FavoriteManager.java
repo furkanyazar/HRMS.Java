@@ -53,7 +53,18 @@ public class FavoriteManager implements FavoriteService {
     }
 
     @Override
-    public Result delete(Favorite favorite) {
+    public Result delete(int userId, int jobPostingId) {
+        Favorite favorite = new Favorite();
+
+        List<Favorite> allFavorites = favoriteDao.findAll();
+
+        for (Favorite f : allFavorites) {
+            if (f.getUser().getId() == userId && f.getJobPosting().getId() == jobPostingId) {
+                favorite = f;
+                break;
+            }
+        }
+
         favoriteDao.delete(favorite);
         return new Result(true, "Favorilerden kaldırıldı");
     }
@@ -61,6 +72,11 @@ public class FavoriteManager implements FavoriteService {
     @Override
     public DataResult<List<Favorite>> findAll() {
         return new SuccessDataResult<List<Favorite>>(favoriteDao.findAll(), "Favoriler listelendi");
+    }
+
+    @Override
+    public DataResult<List<Favorite>> findByUserId(int id) {
+        return new SuccessDataResult<List<Favorite>>(favoriteDao.findByUserId(id));
     }
 
 }

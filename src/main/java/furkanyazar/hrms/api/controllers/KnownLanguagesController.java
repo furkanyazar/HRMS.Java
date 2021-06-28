@@ -38,4 +38,9 @@ public class KnownLanguagesController {
 		return knownLanguageService.findByUserId(userId);
 	}
 
+	@PostMapping("/remove")
+	public Result remove(int id) {
+		return knownLanguageService.remove(id);
+	}
+
 }

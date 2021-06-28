@@ -10,8 +10,10 @@ public interface FavoriteService {
 
     Result add(Favorite favorite, int userId, int jobPostingId);
 
-    Result delete(Favorite favorite);
+    Result delete(int userId, int jobPostingId);
 
     DataResult<List<Favorite>> findAll();
+
+    DataResult<List<Favorite>> findByUserId(int id);
     
 }

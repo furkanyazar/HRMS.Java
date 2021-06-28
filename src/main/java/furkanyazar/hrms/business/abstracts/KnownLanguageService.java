@@ -12,4 +12,8 @@ public interface KnownLanguageService {
 
 	DataResult<List<KnownLanguage>> findByUserId(int userId);
 
+	DataResult<KnownLanguage> findById(int id);
+
+	Result remove(int id);
+
 }
