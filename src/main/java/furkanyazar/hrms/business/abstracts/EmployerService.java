@@ -6,6 +6,7 @@ import furkanyazar.hrms.core.utilities.results.DataResult;
 import furkanyazar.hrms.core.utilities.results.Result;
 import furkanyazar.hrms.entities.concretes.ActivationEmployer;
 import furkanyazar.hrms.entities.concretes.Employer;
+import furkanyazar.hrms.entities.concretes.Update;
 
 public interface EmployerService {
 
@@ -23,6 +24,6 @@ public interface EmployerService {
 
 	DataResult<Employer> findByEmailAndPassword(String email, String password);
 
-	Result edit(Employer employer, int id);
+	Result edit(Update update, int id);
 
 }

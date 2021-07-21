@@ -21,6 +21,7 @@ import furkanyazar.hrms.dataAccess.abstracts.EmployerDao;
 import furkanyazar.hrms.entities.concretes.ActivationEmployer;
 import furkanyazar.hrms.entities.concretes.Employer;
 import furkanyazar.hrms.entities.concretes.Photo;
+import furkanyazar.hrms.entities.concretes.Update;
 
 @Service
 public class EmployerManager implements EmployerService {
@@ -105,16 +106,16 @@ public class EmployerManager implements EmployerService {
 	}
 
 	@Override
-	public Result edit(Employer employer, int id) {
+	public Result edit(Update update, int id) {
 		try {
-			Employer tempEmployer = getById(id).getData();
+			Employer employer = getById(id).getData();
 
-			tempEmployer.setCompanyName(employer.getCompanyName());
-			tempEmployer.setWebsite(employer.getWebsite());
-			tempEmployer.setEmail(employer.getEmail());
-			tempEmployer.setPhoneNumber(employer.getPhoneNumber());
+			employer.setCompanyName(update.getCompanyName());
+			employer.setWebsite(update.getWebsite());
+			employer.setEmail(update.getEmail());
+			employer.setPhoneNumber(update.getPhoneNumber());
 
-			employerDao.save(tempEmployer);
+			employerDao.save(employer);
 
 			return new Result(true, "Bilgiler kaydedildi");
 		} catch (Exception e) {
