@@ -5,22 +5,26 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import furkanyazar.hrms.business.abstracts.PhotoService;
 import furkanyazar.hrms.business.abstracts.StaffService;
 import furkanyazar.hrms.core.utilities.results.DataResult;
 import furkanyazar.hrms.core.utilities.results.Result;
 import furkanyazar.hrms.core.utilities.results.SuccessDataResult;
 import furkanyazar.hrms.dataAccess.abstracts.StaffDao;
+import furkanyazar.hrms.entities.concretes.Photo;
 import furkanyazar.hrms.entities.concretes.Staff;
 
 @Service
 public class StaffManager implements StaffService {
 
 	private StaffDao staffDao;
+	private PhotoService photoService;
 
 	@Autowired
-	public StaffManager(StaffDao staffDao) {
+	public StaffManager(StaffDao staffDao, PhotoService photoService) {
 		super();
 		this.staffDao = staffDao;
+		this.photoService = photoService;
 	}
 
 	@Override
@@ -31,6 +35,7 @@ public class StaffManager implements StaffService {
 	@Override
 	public Result add(Staff staff) {
 		staffDao.save(staff);
+		photoService.add(new Photo(), staff);
 		return new Result(true, "Çalışan eklendi");
 	}
 

@@ -18,4 +18,9 @@ public interface JobPostingDao extends JpaRepository<JobPosting, Integer> {
 
     List<JobPosting> getByIsActivatedAndUserId(Boolean isActivated, int userId);
 
+    List<JobPosting> getByIsActivatedAndCityId(Boolean isActivated, int cityId);
+
+    List<JobPosting> getByIsActivatedAndWorkingTimeId(Boolean isActivated, int workingTimeId);
+
+    List<JobPosting> getByIsActivatedAndCityIdAndWorkingTimeId(boolean isActivated, int cityId, int workingTimeId);
 }

@@ -18,6 +18,13 @@ public interface JobPostingService {
 
     DataResult<List<JobPosting>> getByIsActivatedAndUserId(Boolean isActivated, int userId);
 
+    DataResult<List<JobPosting>> getByIsActivatedAndCity(Boolean isActivated, int city);
+
+    DataResult<List<JobPosting>> getByIsActivatedAndWorkingTime(Boolean isActivated, int workingTime);
+
+    DataResult<List<JobPosting>> getByIsActivatedAndCityAndWorkingTime(boolean isActivated, int city,
+            int workingTime);
+
     Result add(JobPosting jobPosting);
 
     Result setIsActivated(JobPosting jobPosting, Boolean isActivated, int id);

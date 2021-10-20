@@ -15,6 +15,7 @@ import furkanyazar.hrms.core.utilities.results.DataResult;
 import furkanyazar.hrms.core.utilities.results.Result;
 import furkanyazar.hrms.entities.concretes.ActivationEmployer;
 import furkanyazar.hrms.entities.concretes.Employer;
+import furkanyazar.hrms.entities.concretes.Update;
 
 @RestController
 @RequestMapping("/api/employers")
@@ -60,8 +61,8 @@ public class EmployersController {
 	}
 
 	@PostMapping("/edit")
-	public Result edit(@RequestBody Employer employer, int id) {
-		return employerService.edit(employer, id);
+	public Result edit(@RequestBody Update update, int id) {
+		return employerService.edit(update, id);
 	}
 
 }

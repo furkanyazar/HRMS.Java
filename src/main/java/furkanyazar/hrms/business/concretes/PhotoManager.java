@@ -24,7 +24,7 @@ public class PhotoManager implements PhotoService {
 
 	@Override
 	public Result add(Photo photo, User user) {
-		photo.setPhotoLink("https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/User_icon_2.svg/2048px-User_icon_2.svg.png");
+		photo.setPhotoLink("https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png");
 		photo.setUser(user);
 		photoDao.save(photo);
 		return new Result(true, "Resim yüklendi");
